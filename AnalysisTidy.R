@@ -1,8 +1,6 @@
-#library(dplyr)
-
 # Read in the data and clean up names
 setwd("~/Analysis/lambda/AliAnalysisLambda/Fitting/FemtoFitting/FitResults")
-data <- read.csv("FitResultsTidyNoLL3050.csv")
+data <- read.csv("FitResultsTidyGlobalFitsOnly.csv")
 cleanNames <- gsub(".", "", colnames(data), fixed = TRUE)
 colnames(data) <- cleanNames
 summary(data)
@@ -44,7 +42,5 @@ resultsAll$Sigma <- sqrt(resultsAll$RMS^2 - resultsAll$Mean^2)
 # or the bkg coefficients. Let's just take radius, Ref0, Imf0, and d0.
 results <- resultsAll[grep("Rad|ReF0|ImF0LA|D0", rownames(resultsAll)), ]
 
-write.csv(results, file = "FitTable.csv")
+write.csv(results, file = "FitTableGlobalOnly.csv")
 
-
-4
