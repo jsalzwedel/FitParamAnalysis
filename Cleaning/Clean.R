@@ -9,7 +9,9 @@ summary(dataRaw)
 data <- dataRaw[rowSums(is.na(dataRaw)) != ncol(dataRaw),]
 
 # Remove the LLAA Im(f0) columns
-data <- data[,!names(data) %in% c("ImF0LLAA010", "ImF0LLAA010Err")]
+data <- data[,!names(data) %in% c("ImF0LLAA010", "ImF0LLAA010Err",
+                                  "ImF0LLAA1030", "ImF0LLAA1030Err",
+                                  "ImF0LLAA3050", "ImF0LLAA3050Err")]
 
 # We won't use any analyses with LLAA 30-50% cent. Remove rows where they were
 # included, then remove those columns.
@@ -29,3 +31,4 @@ dataSep <- data[!rowGlobal,]
 # Write the cleaned up data
 write.csv(dataGlobal, file = "CleanGlobalFits.csv")
 write.csv(dataSep, file = "CleanSepFits.csv")
+
