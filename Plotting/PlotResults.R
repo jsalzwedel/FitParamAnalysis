@@ -49,11 +49,12 @@ PlotMeasurements <- function(data, valColName) {
     
     # Subset the data to take just the non-NA rows of those two columns
     dataset <- data[!is.na(data[,valColIndex]), c(valColName, errColName)]
-    
+    colnames(dataset) <- c("Value","Error")
     # Setup the ggplot of the data
-    g <- ggplot(dataset, aes(y=valColName, x=as.numeric(rownames(dataset))))
+    g <- ggplot(dataset, aes(y = Value, x=as.numeric(rownames(dataset))))
     g <- g + geom_point(stat="identity", position = position_dodge(width=1))    
-    gLimits <- aes(ymax = valColName + errColName, ymin = valColName - errColName)
+    gLimits <- aes(ymax = Value + Error,
+                   ymin = Value - Error)
     g <- g + geom_errorbar(gLimits)
     g
 }
