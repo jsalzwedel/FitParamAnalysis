@@ -50,7 +50,7 @@ Analyze <- function(data, outputName) {
 # Analyze both the global fit data and separate fit data
 dataSep <- read.csv("../Cleaning/CleanSepFits.csv", row.names=1)
 dataGlobal <- read.csv("../Cleaning/CleanGlobalFits.csv", row.names=1)
-data  <- dataGlobal
+
 
 Analyze(dataSep,"SepFit")
 Analyze(dataGlobal,"GlobalFit")
