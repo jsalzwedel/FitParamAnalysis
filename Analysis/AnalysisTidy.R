@@ -1,9 +1,15 @@
 # Read in the data and clean up names
-setwd("~/Analysis/lambda/AliAnalysisLambda/Fitting/FemtoFitting/FitResults")
-data <- read.csv("FitResultsTidyGlobalFitsOnly.csv")
-cleanNames <- gsub(".", "", colnames(data), fixed = TRUE)
-colnames(data) <- cleanNames
-summary(data)
+setwd("~/Analysis/lambda/AliAnalysisLambda/Fitting/FemtoFitting/FitResults/RAnalysis/Analysis")
+dataRaw <- read.csv("../FitTable-2016-06-28-CFWeightCombine.csv")
+cleanNames <- gsub(".", "", colnames(dataRaw), fixed = TRUE)
+colnames(dataRaw) <- cleanNames
+summary(dataRaw)
+
+# Remove the empty rows (trailing whitespace in the spreadsheet)
+data <- dataRaw[rowSums(is.na(dataRaw)) != ncol(dataRaw),]
+
+# Remove the LLAA Im(f0) columns
+data <- data[,!names(data) %in% c("ImF0LLAA010", "ImF0LLAA010Err")]
 
 # Remove the LLAA 3050 columns
 ll3050Cols <- grepl("LLAA3050", colnames(data))
