@@ -25,10 +25,20 @@ data <- data[!ll3050Cols]
 rowGlobal <- with(data, !is.na(RadiusLLAA010) 
                   & !is.na(ReF0LA010) 
                   & is.na(RadiusLA010))
-dataGlobal <- data[rowGlobal,]
-dataSep <- data[!rowGlobal,] 
+
+# Find the fits with Imf0 fixed to 1
+rowImF0Fixed <- with(data, !is.na(ImF0LA010) & is.na(ImF0LA010Err))
+
+# Split up the data
+dataGlobalNoFix <- data[rowGlobal & !rowImF0Fixed,]
+dataGlobalFixed <- data[rowGlobal & rowImF0Fixed,]
+dataSepNoFix <- data[!rowGlobal & !rowImF0Fixed,] 
+dataSepFixed <- data[!rowGlobal & rowImF0Fixed,]
+
+
 
 # Write the cleaned up data
-write.csv(dataGlobal, file = "CleanGlobalFits.csv")
-write.csv(dataSep, file = "CleanSepFits.csv")
-
+write.csv(dataGlobalNoFix, file = "GlobalNoImF0FixFits.csv")
+write.csv(dataGlobalFixed, file = "GlobalImF0FixedFits.csv")
+write.csv(dataSepNoFix, file = "SepNoImF0FixFits.csv")
+write.csv(dataSepFixed, file = "SepImF0FixedFits.csv")
