@@ -48,9 +48,13 @@ Analyze <- function(data, outputName) {
 }
 
 # Analyze both the global fit data and separate fit data
-dataSep <- read.csv("../Cleaning/CleanSepFits.csv", row.names=1)
-dataGlobal <- read.csv("../Cleaning/CleanGlobalFits.csv", row.names=1)
+dataSepFree <- read.csv("../Cleaning/SepNoImF0FixFits.csv", row.names=1)
+dataSepFixed <- read.csv("../Cleaning/SepImF0FixedFits.csv", row.names=1)
+dataGlobalFree <- read.csv("../Cleaning/GlobalNoImF0FixFits.csv", row.names=1)
+dataGlobalFixed <- read.csv("../Cleaning/GlobalImF0FixedFits.csv", row.names=1)
 
 
-Analyze(dataSep,"SepFit")
-Analyze(dataGlobal,"GlobalFit")
+Analyze(dataSepFree, "SepFitFree")
+Analyze(dataSepFixed, "SepFitFixed")
+Analyze(dataGlobalFree, "GlobalFitFree")
+Analyze(dataGlobalFixed, "GlobalFitFixed")
