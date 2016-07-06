@@ -1,6 +1,6 @@
 # Read in the data and clean up names
 setwd("~/Analysis/lambda/AliAnalysisLambda/Fitting/FemtoFitting/FitResults/RAnalysis/Cleaning")
-dataRaw <- read.csv("../FitTable-2016-06-28-CFWeightCombine.csv")
+dataRaw <- read.csv("../FitTable-2016-07-05-GlobalImf0.csv")
 cleanNames <- gsub(".", "", colnames(dataRaw), fixed = TRUE)
 colnames(dataRaw) <- cleanNames
 summary(dataRaw)
@@ -35,7 +35,8 @@ dataGlobalFixed <- data[rowGlobal & rowImF0Fixed,]
 dataSepNoFix <- data[!rowGlobal & !rowImF0Fixed,] 
 dataSepFixed <- data[!rowGlobal & rowImF0Fixed,]
 
-
+# Remove Trials 31-33 (rows 1-3 of dataGlobalFixed) because wrong fit range
+dataGlobalFixed <- dataGlobalFixed[c(4:6),]
 
 # Write the cleaned up data
 write.csv(dataGlobalNoFix, file = "GlobalNoImF0FixFits.csv")
